@@ -7,7 +7,7 @@ $grey-light: #eaeaea;
 $grey-dark: #808080;
 $white: #fff;
 $header-height: 60px;
-$sidebar-width: 300px;
+$sidebar-width: 375px;
 
 // GLOBAL RESET
 *,
@@ -30,4 +30,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   //   background-color: $primary;
+}
+
+li {
+  list-style: none;
 }

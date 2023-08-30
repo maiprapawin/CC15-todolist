@@ -27,5 +27,37 @@
   }
 }
 
-// HEADER
-// ย้ายไปไว้ที่ Header.scss
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 30px;
+  height: calc(100vh - $header-height);
+}
+
+// Block
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  // Element
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.8rem;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $grey-light;
+    }
+
+    // Modifier
+    &__text {
+      font-weight: 400;
+    }
+  }
+}
