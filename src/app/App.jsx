@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import ListItem from "../components/ListItem";
 import Lists from "../components/Lists";
 import TodoHeader from "../components/Todo/TodoHeader";
+import TodoCreate from "../components/Todo/TodoCreate";
 
 function App() {
   // <ListItem text="Inbox" icon={<FaInbox />} active={true} />
@@ -53,10 +54,8 @@ function App() {
       </div>
       <div className="todo__content">
         <main className="todo__container">
-          {/* Header */}
           <TodoHeader />
-
-          {/* CreateTodo */}
+          <TodoCreate />
 
           {/* TodoLists */}
         </main>
