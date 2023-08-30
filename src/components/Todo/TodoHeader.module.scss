@@ -1,0 +1,16 @@
+@import "../../index.scss";
+
+.header {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+
+  &__text {
+    font-size: 2.4 rem;
+  }
+
+  &__date {
+    font-size: 1.2rem;
+    color: $grey-dark;
+  }
+}
