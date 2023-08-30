@@ -35,29 +35,34 @@
   height: calc(100vh - $header-height);
 }
 
-// Block
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+// SCSS: mixins and extends concept
 
-  // Element
+// BLOCK
+.accordion {
+  // ELEMENT
   &__item {
+    // ทั้งแผง
     display: flex;
     align-items: center;
     gap: 15px;
     font-size: 1.8rem;
     padding: 10px;
     border-radius: 4px;
-    cursor: pointer;
+    font-weight: 900;
 
-    &:hover {
-      background-color: $grey-light;
+    // MODIFIER
+    &__icon {
+      cursor: pointer;
+      transition: 1s;
     }
 
-    // Modifier
+    &__active {
+      transform: rotate(-90deg);
+    }
+
     &__text {
-      font-weight: 400;
+      // ข้อความอย่างเดียว
+      font-weight: inherit;
     }
   }
 }
