@@ -1,1 +1,42 @@
 @import "../../index.scss";
+
+.todo {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  align-items: baseline;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1.8rem;
+  color: $grey-dark;
+
+  &:hover {
+    background-color: $grey-light;
+  }
+
+  &__checkbox {
+    color: $grey-dark;
+    height: 16px;
+    width: 16px;
+    display: block;
+    border: 1px solid $grey-dark;
+    border-radius: 16px;
+    text-align: center;
+    line-height: 16px;
+  }
+
+  &__task {
+    flex: 1; // ดันชาวบ้านไปสุดขอบเลย
+  }
+
+  &__date {
+  }
+
+  &__action {
+    flex-basis: 80px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+    font-size: 12px;
+  }
+}

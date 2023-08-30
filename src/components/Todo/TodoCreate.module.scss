@@ -24,7 +24,6 @@
     border-radius: 50%;
 
     // ทำให้ปุ่มอยู่กลาง
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,9 +35,5 @@
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 1.2rem;
-
-    &:hover {
-      color: $primary;
-    }
   }
 }
