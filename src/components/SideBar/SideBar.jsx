@@ -1,17 +1,22 @@
-import styles from './SideBar.module.scss';
-import { FaInbox, FaCalendar, FaCalendarAlt, FaChevronDown } from 'react-icons/fa';
-import Lists from './Lists';
+import styles from "./SideBar.module.scss";
+import {
+  FaInbox,
+  FaCalendar,
+  FaCalendarAlt,
+  FaChevronDown,
+} from "react-icons/fa";
+import Lists from "./Lists";
 
 function SideBar() {
   const generalLists = [
-    { id: 1, text: 'Inbox', icon: <FaInbox />, active: true },
-    { id: 2, text: 'Today', icon: <FaCalendar />, active: false },
-    { id: 3, text: 'Next 7 Days', icon: <FaCalendarAlt />, active: false },
+    { id: 1, text: "Inbox", icon: <FaInbox />, active: true },
+    { id: 2, text: "Today", icon: <FaCalendar />, active: false },
+    { id: 3, text: "Next 7 Days", icon: <FaCalendarAlt />, active: false },
   ];
 
   const projectLists = [
-    { id: 4, text: 'Project-A', icon: <FaInbox />, active: false },
-    { id: 5, text: 'Project-B', icon: <FaInbox />, active: false },
+    { id: 4, text: "Project-A", icon: <FaInbox />, active: false },
+    { id: 5, text: "Project-B", icon: <FaInbox />, active: false },
   ];
   return (
     <aside className={styles.sidebar}>
@@ -20,8 +25,9 @@ function SideBar() {
       </section>
 
       <section className={styles.sidebar__category}>
+        {/* Accordion */}
         <div className={styles.accordion}>
-          {/* Toggle */}
+          {/* 1 - Toggle */}
           <div className={styles.accordion__toggle}>
             <li className={styles.accordion__item}>
               <FaChevronDown
@@ -30,6 +36,7 @@ function SideBar() {
               <p className={styles.accordion__item__text}>Projects</p>
             </li>
           </div>
+          {/* 2 - Lists */}
           <Lists data={projectLists} />
         </div>
       </section>
