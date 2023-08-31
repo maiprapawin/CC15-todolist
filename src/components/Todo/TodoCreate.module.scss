@@ -3,7 +3,7 @@
 .todo__create {
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: baseline;
   cursor: pointer;
 
   &:hover {
@@ -19,14 +19,22 @@
 
   &__button {
     font-size: 2.4rem;
+    // display: table-cell;
+
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 50%;
 
     // ทำให้ปุ่มอยู่กลาง
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // white-space: normal;
+    // word-break: break-word;
+
+    display: inline-block; // inline เฉยๆ ควบคุมความสูงไม่ได้ เลยใช้ inline-block เราจะ control ด้านสูงได้ โดย width จะเป็นความกว้างของตัวมันเอง
+    vertical-align: middle; // อยู่ตรงกลางของบนล่าง
+    text-align: center; // อยู่ตรงกลางของซ้ายขวา
     line-height: 2.2rem;
   }
 
