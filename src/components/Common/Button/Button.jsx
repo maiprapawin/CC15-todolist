@@ -1,12 +1,16 @@
 import styles from "./Button.module.scss";
 
 // Button (Obj) ===
-// Button ({text,active})
+// Button ({text, active, type, onClick})
 
-export function Button({ type, text, active = true }) {
+export function Button({ type, onClick, text, active = true }) {
   let btnStyles = active ? styles.btn__primary : styles.btn__secondary;
   return (
-    <button className={`${styles.btn} ${btnStyles}`} type={type}>
+    <button
+      className={`${styles.btn} ${btnStyles}`}
+      type={type}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

@@ -30,6 +30,10 @@ function TodoForm(props) {
     console.log("submit");
   };
 
+  const handleCancel = function () {
+    console.log("cancel");
+  };
+
   return (
     <form className={styles.todo__form__container} onSubmit={handleSubmit}>
       {/*	Body */}
@@ -41,8 +45,16 @@ function TodoForm(props) {
           <p className={styles.todo__error}>Title is required</p>
         ) : null}
         <div className={styles.todo__form__buttons}>
-          <Button text="Cancel" active={false} type="button" />
+          <Button
+            text="Cancel"
+            active={false}
+            type="button"
+            onClick={handleCancel}
+          />
           <Button text={props.textSubmit} active={true} type="submit" />
+          {/* <button type="button" onClick={handleCancel}>
+            POC
+          </button> */}
         </div>
       </div>
     </form>
