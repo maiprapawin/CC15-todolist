@@ -47,6 +47,8 @@ Concept 5 >> React State (ก็คือเหมือน array destructuring)
   const [state, setState] = useState(initialState: any)
   // element 1 : current State
   // element 2 : Fn สำหรับ setState
+  // เมื่อ State เปลี่ยน Function Component จะ Rerender
+  // Rerender == Code ทั้งหมดใน FC จะถูกรันใหม่อีกครั้งหนึ่ง
 */
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,16 +57,10 @@ Concept 5 >> React State (ก็คือเหมือน array destructuring)
 function TodoCreate() {
   // HOOK FN
   const [isOpenForm, setIsOpenForm] = useState(false);
-  console.log(isOpenForm);
-
-  let active = true;
 
   // #2 : JS Function (Logic)
   const handleClick = function (event) {
-    console.log("clicked");
     setIsOpenForm(!isOpenForm);
-    // active = !active;
-    // console.log("clicked", active);
   };
 
   return (
