@@ -1,10 +1,12 @@
-@import "../../index.scss";
+@import '../../styles/global.scss';
 
 .todo__create {
   display: flex;
-  gap: 10px;
-  align-items: baseline;
+  gap: 15px;
+  align-items: center;
   cursor: pointer;
+  padding: 10px $todo-content-padding;
+  color: $grey-700;
 
   &:hover {
     & .todo__create__button {
@@ -18,30 +20,23 @@
   }
 
   &__button {
-    font-size: 2.4rem;
-    // display: table-cell;
-
-    width: 2.4rem;
-    height: 2.4rem;
+    width: $circle;
+    height: $circle;
     border-radius: 50%;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $circle * 0.9;
 
     // ทำให้ปุ่มอยู่กลาง
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // white-space: normal;
-    // word-break: break-word;
-
-    display: inline-block; // inline เฉยๆ ควบคุมความสูงไม่ได้ เลยใช้ inline-block เราจะ control ด้านสูงได้ โดย width จะเป็นความกว้างของตัวมันเอง
-    vertical-align: middle; // อยู่ตรงกลางของบนล่าง
-    text-align: center; // อยู่ตรงกลางของซ้ายขวา
-    line-height: 2.2rem;
+    // display: inline-block;
+    // vertical-align: middle;
+    // text-align: center;
   }
 
   &__text {
-    color: $grey-dark;
     font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 1.2rem;
+    font-size: $text-xl;
   }
 }

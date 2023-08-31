@@ -1,16 +1,18 @@
-@import "../../index.scss";
+@import '../../styles/global.scss';
 
 .header {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   align-items: baseline;
+  padding: $todo-content-padding;
+  padding-top: 0;
 
   &__text {
-    font-size: 2.4 rem;
+    font-size: $text-4xl;
   }
 
   &__date {
-    font-size: 1.2rem;
-    color: $grey-dark;
+    font-size: $text-base;
+    color: $grey-600;
   }
 }
