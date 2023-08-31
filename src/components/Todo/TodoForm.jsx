@@ -25,20 +25,33 @@ props = {
 ///////////////////////
 
 function TodoForm(props) {
-  const [isError, setIsError] = useState(true);
+  const [isError, setIsError] = useState(false);
   const [taskInput, setTaskInput] = useState("");
   // console.log(taskInput);
 
   const handleChangeInput = function (event) {
     // console.log("user typing...", event.target.value);
+
+    if (isError) setIsError(false);
     setTaskInput(event.target.value);
   };
 
   const handleSubmit = function (event) {
+    // 1. PreventDefault
     event.preventDefault();
-    // FormValidation
-    // Case 1: Submit ได้
-    // Case 2: Submit ไม่ได้ => แสดง Error
+
+    // 2. ก่อนจะ submit เราต้องรู้ก่อนว่า user พิมพ์อะไร >> รู้ผ่าน state: taskInput
+
+    // 3. FormValidation
+    // Case 1: Submit ได้ => ไม่ error
+    // Case 2: Submit ไม่ได้ => แสดง error
+
+    if (taskInput.trim() === "") {
+      console.log("Error");
+      setIsError(true);
+      return;
+    }
+    console.log("submit");
   };
 
   const handleCancel = function () {
