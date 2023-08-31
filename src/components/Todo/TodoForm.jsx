@@ -31,8 +31,8 @@ function TodoForm(props) {
 
   const handleChangeInput = function (event) {
     // console.log("user typing...", event.target.value);
-
     if (isError) setIsError(false);
+    // if (event.target.value.trim() === "") setIsError(true);
     setTaskInput(event.target.value);
   };
 
