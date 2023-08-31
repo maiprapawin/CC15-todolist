@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { HiOutlineCurrencyBangladeshi } from "react-icons/hi";
 
 import { Button } from "../Common/Button/Button";
 import styles from "./TodoForm.module.scss";
@@ -25,14 +26,22 @@ props = {
 
 function TodoForm(props) {
   const [isError, setIsError] = useState(true);
+  const [taskInput, setTaskInput] = useState("");
+  // console.log(taskInput);
+
+  const handleChangeInput = function (event) {
+    // console.log("user typing...", event.target.value);
+    setTaskInput(event.target.value);
+  };
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    console.log("submit");
+    // FormValidation
+    // Case 1: Submit ได้
+    // Case 2: Submit ไม่ได้ => แสดง Error
   };
 
   const handleCancel = function () {
-    console.log("cancel");
     // correct props name = setIsOpenForm(false)
     // incorrect props name = undefined(false) => BOOM!!
     props.setIsOpenForm(false);
@@ -41,7 +50,12 @@ function TodoForm(props) {
   return (
     <form className={styles.todo__form__container} onSubmit={handleSubmit}>
       {/*	Body */}
-      <input className={styles.todo__form__input} placeholder="Task Name" />
+      <input
+        className={styles.todo__form__input}
+        placeholder="Task Name"
+        value={taskInput}
+        onChange={handleChangeInput}
+      />
 
       {/*Form Footer */}
       <div className={styles.todo__form__footer}>

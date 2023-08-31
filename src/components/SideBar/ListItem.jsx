@@ -1,5 +1,5 @@
-import styles from './ListItem.module.scss';
-import { FaInbox } from 'react-icons/fa';
+import styles from "./ListItem.module.scss";
+import { FaInbox } from "react-icons/fa";
 
 /*
 props = {
@@ -9,9 +9,9 @@ props = {
 }
 */
 function ListItem(props) {
-  console.log(props); // props = {text: "custom text"}
+  // props = {text: "custom text"}
 
-  const listClassName = `${styles.list__item} ${props.active ? 'active' : ''}`;
+  const listClassName = `${styles.list__item} ${props.active ? "active" : ""}`;
   // active=false => textClassName = "list__item"
   // active=true => textClassName = "list__item active"
 
