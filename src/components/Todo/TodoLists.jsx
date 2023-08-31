@@ -1,44 +1,65 @@
-import { useState } from "react";
-import { FaTrashAlt, FaPen } from "react-icons/fa";
-import { HiOutlineCheck } from "react-icons/hi";
-
-import TodoForm from "./TodoForm";
+import TodoItem from "./TodoItem";
 import styles from "./TodoLists.module.scss";
 
 ///////////////////////////////
 
-function TodoLists() {
-  const [isOpenForm, setIsOpenForm] = useState(false);
+/*
+SCEMA
+todoObj: {id: number, task: string, status: boolean, due_date: string}
 
-  const handleClick = function () {
-    setIsOpenForm(!isOpenForm);
-  };
+data = Array[]{id: number, task: string, status: boolean, due_date: string}
+หรือ data = Array[] todoObj
+
+dataRender = Array[] <TodoItem task=... done=... date=... />
+
+*/
+
+const data = [
+  {
+    id: 1,
+    task: "Suspendisse potenti.",
+    status: false,
+    due_date: "2023-04-26",
+  },
+  {
+    id: 2,
+    task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
+    status: false,
+    due_date: "2023-05-08",
+  },
+  {
+    id: 3,
+    task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
+    status: false,
+    due_date: "2023-04-30",
+  },
+];
+
+function TodoLists() {
+  // CRUD = Create-Read-Update-Delete
+
+  // const [allTodos, setAllTodos] = useState(data);
+
+  // const dataRender = data.map((todoObj) => (
+  //   <TodoItem
+  //     key={todoObj.id}
+  //     task={todoObj.task}
+  //     done={todoObj.status}
+  //     date={todoObj.due_date}
+  //   />
+  // ));
+  // return <ul className={styles.todo__lists}>{dataRender}</ul>;
 
   return (
     <ul className={styles.todo__lists}>
-      {isOpenForm ? (
-        <TodoForm textSubmit="Edit Task" setIsOpenForm={setIsOpenForm} />
-      ) : (
-        <li className={styles.todo}>
-          <div
-            className={`${styles.todo__checkbox} ${styles.todo__checkbox__done}`}
-          >
-            <HiOutlineCheck className={styles.todo__checkbox__icon} />
-          </div>
-          <p className={`${styles.todo__task} ${styles.todo__task__done}`}>
-            todo-item 1
-          </p>
-          <span className={styles.todo__date}>30 Aug</span>
-          <div className={styles.todo__action}>
-            <span onClick={handleClick}>
-              <FaPen className={styles.todo__edit} />
-            </span>
-            <span>
-              <FaTrashAlt className={styles.todo__delete} />
-            </span>
-          </div>
-        </li>
-      )}
+      {data.map((todoObj) => (
+        <TodoItem
+          key={todoObj.id}
+          task={todoObj.task}
+          done={todoObj.status}
+          date={todoObj.due_date}
+        />
+      ))}
     </ul>
   );
 }
