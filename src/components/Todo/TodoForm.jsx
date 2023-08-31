@@ -4,12 +4,6 @@ import { Button } from "../Common/Button/Button";
 import styles from "./TodoForm.module.scss";
 
 /*
-props = {
-  textSubmit: string
-}
-
-///////////////////////
-
 Concept 1 - Form Handle
 - ใช้ FN ไปผูกกับ Event ชื่อ onSubmit
 - FN จะถูก browser เรียกใช้ (เมื่อไหร่ ?) โดยส่ง parameter มา 1 ตัว (event object)
@@ -17,10 +11,17 @@ Concept 1 - Form Handle
 - วิธีแก้ >> ต้องกำหนด type ของปุ่ม
   // 1. type = "submit" // <button type="submit">2</button>
   // 2. type = "button" // <button type="button">1</button> // ถ้าเราไม่ใส่ button มันจะถือว่าทุกปุ่มเป็น type submit
-
-
-
 */
+
+/*
+props = {
+  textSubmit: string;
+  setIsOpenForm: FN;
+}
+*/
+
+///////////////////////
+///////////////////////
 
 function TodoForm(props) {
   const [isError, setIsError] = useState(true);
@@ -32,6 +33,9 @@ function TodoForm(props) {
 
   const handleCancel = function () {
     console.log("cancel");
+    // correct props name = setIsOpenForm(false)
+    // incorrect props name = undefined(false) => BOOM!!
+    props.setIsOpenForm(false);
   };
 
   return (
