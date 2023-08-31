@@ -1,4 +1,4 @@
-@import '../../styles/global.scss';
+@import "../../styles/global.scss";
 
 .todo__form__container {
   width: 100%;
@@ -31,25 +31,12 @@
 .todo__error {
   justify-self: start;
   padding: 10px;
-  font-size: 10px;
-  font-weight: 800;
+  font-size: $text-base;
+  font-weight: 600;
   color: $primary;
 }
 .todo__form__buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  flex: 1;
-
-  & > button {
-    border: none;
-    padding: 8px;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-
-  & > button:last-child {
-    background-color: $primary;
-    color: $white;
-  }
 }
