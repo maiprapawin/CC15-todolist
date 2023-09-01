@@ -62,7 +62,7 @@ function App() {
     setAllTodos((prev) => prev.filter((todo) => todo.id !== todoId));
   };
 
-  const editTodo = function (todoId, newTodoObj) {
+  const editTodo = function (todoId, updateTodoObj) {
     ///// Practice #1 /////
     // let foundTodo = allTodos.find((todo) => todo.id === todoId);
     // if (!foundTodo) return; // => function นี้จะไม่แก้ไขอะไร
@@ -77,10 +77,18 @@ function App() {
     // setAllTodos(newTodoLists);
 
     ///// Practice #2 /////
-    const newTodoLists = allTodos.map(function (todo) {
-      if (todo.id !== todoId) return todo;
-      else return { ...todo, ...newTodoObj };
-    });
+    // const newTodoLists = allTodos.map(function (todo) {
+    //   if (todo.id !== todoId) return todo;
+    //   else return { ...todo, ...newTodoObj };
+    // });
+    // setAllTodos(newTodoLists);
+
+    ///// Practice #3 /////
+    const newTodoLists = allTodos.reduce((acc, todo) => {
+      if (todo.id !== todoId) acc.push(todo);
+      else acc.push({ ...todo, ...updateTodoObj });
+      return acc;
+    }, []); // รอบแรกเริ่มที่ array เปล่า
     setAllTodos(newTodoLists);
   };
 
