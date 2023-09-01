@@ -10,7 +10,7 @@ function TodoItem({ id, task, done, date }) {
   // function TodoItem(props) {
   // const {task,done,date} = props }
   const [isOpenForm, setIsOpenForm] = useState(false);
-  console.log(id);
+  // console.log(id);
 
   const handleClick = function () {
     setIsOpenForm(!isOpenForm);

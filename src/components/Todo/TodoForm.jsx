@@ -41,6 +41,7 @@ function TodoForm(props) {
 
     // 2. ก่อนจะ submit เราต้องรู้ก่อนว่า user พิมพ์อะไร >> รู้ผ่าน state: taskInput
 
+    // /// ***** START LOGIC: For Creating Todo ***** /////
     // 3. FormValidation
     // Case 1: Submit ได้ => ไม่ error
     // Case 2: Submit ไม่ได้ => แสดง error
@@ -50,23 +51,33 @@ function TodoForm(props) {
       setIsError(true);
       return;
     }
-    console.log("submit === create new Todo");
-    // create NewTodo
-    // 1. ส่ง Request ไปหลังบ้านเพื่อ save ลง Database
-    // 2. ทำการอัพเดท State ของ AllTodo == React ทำการ Rerender
-    // data = []
-    // data = [{id: number, task: string, status: boolean, due_date: YYYY-MM-DD}]
-    // oldState = [{old},{old},{old}] === props.data
-    // newState = [{new},{old},{old},{old}]
-    const newTodo = {
-      id: nanoid(),
-      task: taskInput,
-      status: false,
-      due_date: "2023-01-09",
-    };
-    const newTodoLists = [newTodo, ...props.data];
-    props.setTodo(newTodoLists);
-    // props.setTodo((oldTodo) => [newTodo, ...oldTodo]);
+
+    // console.log("submit === create new Todo");
+    // // create NewTodo
+    // // 1. ส่ง Request ไปหลังบ้านเพื่อ save ลง Database
+    // // 2. ทำการอัพเดท State ของ AllTodo == React ทำการ Rerender
+    // // data = []
+    // // data = [{id: number, task: string, status: boolean, due_date: YYYY-MM-DD}]
+    // // oldState = [{old},{old},{old}] === props.data
+    // // newState = [{new},{old},{old},{old}]
+
+    // const newTodo = {
+    //   id: nanoid(),
+    //   task: taskInput,
+    //   status: false,
+    //   due_date: "2023-01-09",
+    // };
+    // // const newTodoLists = [newTodo, ...props.data];
+    // ///// ***** END LOGIC: For Creating Todo ***** /////
+
+    // ///// *** UPDATE STATE *** /////
+    // props.setTodo((prev) => [newTodo, ...prev]);
+    // // props.setTodo(newTodoLists);
+    // // props.setTodo((oldTodo) => [newTodo, ...oldTodo]);
+
+    // send taskInput to addTodo
+    props.addTodo(taskInput);
+
     props.setIsOpenForm(false);
   };
 
