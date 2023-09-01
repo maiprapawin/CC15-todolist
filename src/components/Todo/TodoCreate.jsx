@@ -1,10 +1,8 @@
-// Library คนอื่น
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 
-// Library เราเอง
-import TodoForm from "./TodoForm"; // ไม่ต้องเติม .js/.jsx ก็ได้
+import TodoForm from "./TodoForm";
 import styles from "./TodoCreate.module.scss";
 
 /////////////////////////////////////////////////////////////////////////////////////////////

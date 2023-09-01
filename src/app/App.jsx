@@ -45,6 +45,45 @@ function App() {
     setAllTodos((p) => [newTodo, ...p]);
   };
 
+  const deleteTodo = function (todoId) {
+    ///// Practice 1 /////
+    // let foundIndex = allTodos.findIndex((todo) => todo.id === todoId);
+    // if (foundIndex !== -1) {
+    //   const newTodoLists = [...allTodos];
+    //   newTodoLists.splice(foundIndex, 1);
+    //   setAllTodos(newTodoLists);
+    // }
+
+    ///// Practice 2 /////
+    // const newTodoLists = allTodos.filter((todo) => todo.id !== todoId);
+    // setAllTodos(newTodoLists);
+
+    ///// Practice 3 /////
+    setAllTodos((prev) => prev.filter((todo) => todo.id !== todoId));
+  };
+
+  const editTodo = function (todoId, newTodoObj) {
+    ///// Practice #1 /////
+    // let foundTodo = allTodos.find((todo) => todo.id === todoId);
+    // if (!foundTodo) return; // => function นี้จะไม่แก้ไขอะไร
+
+    // const newTodo = Object.assign({}, foundTodo, newTodoObj); // ถ้ามีของซ้ำกันมันจะเอาตัวที่อยู่ขวาสุดมาทับฝั่งซ้าย
+
+    // let foundIndex = allTodos.findIndex((todo) => todo.id === todoId);
+    // if (foundIndex === -1) return;
+
+    // const newTodoLists = [...allTodos];
+    // newTodoLists.splice(foundIndex, 1, newTodo); // ลบ 1 ตัวแล้วเพิ่ม newTodo เข้าไป = เอา todo เก่าออกไปแล้วใส่อันใหม่เข้าไปแทน
+    // setAllTodos(newTodoLists);
+
+    ///// Practice #2 /////
+    const newTodoLists = allTodos.map(function (todo) {
+      if (todo.id !== todoId) return todo;
+      else return { ...todo, ...newTodoObj };
+    });
+    setAllTodos(newTodoLists);
+  };
+
   return (
     <div className="todo">
       <div className="todo__header">
@@ -57,7 +96,11 @@ function App() {
         <main className="todo__container">
           <TodoHeader />
           <TodoCreate addTodo={addTodo} />
-          <TodoLists data={allTodos} />
+          <TodoLists
+            data={allTodos}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+          />
         </main>
       </div>
     </div>

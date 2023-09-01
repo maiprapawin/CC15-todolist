@@ -26,7 +26,6 @@ props = {
 function TodoForm(props) {
   const [isError, setIsError] = useState(false);
   const [taskInput, setTaskInput] = useState("");
-  // console.log(taskInput);
 
   const handleChangeInput = function (event) {
     // console.log("user typing...", event.target.value);
