@@ -35,6 +35,7 @@ const data = [
 function App() {
   const [allTodos, setAllTodos] = useState(data);
 
+  // รวม Logics ต่างๆไว้ใน App แล้วค่อยส่งไปให้ลูกๆใช้
   const addTodo = function (taskName) {
     const newTodo = {
       id: nanoid(),

@@ -5,8 +5,6 @@ import { HiPlus } from "react-icons/hi";
 import TodoForm from "./TodoForm";
 import styles from "./TodoCreate.module.scss";
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 /*
 Concept 1 >> Condition Rendering
 - Default Mode: Show Button & Text
@@ -48,8 +46,6 @@ Concept 5 >> React State (ก็คือเหมือน array destructuring)
   // เมื่อ State เปลี่ยน Function Component จะ Rerender
   // Rerender == Code ทั้งหมดใน FC จะถูกรันใหม่อีกครั้งหนึ่ง
 */
-
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 // #1 : FC = Function Component
 function TodoCreate(props) {

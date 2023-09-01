@@ -23,66 +23,38 @@ props = {
 ///////////////////////
 ///////////////////////
 
+/* props:
+          textSubmit="Edit Task"
+          setIsOpenForm={setIsOpenForm}
+          editTodo={editTodo}
+          oldTodo={{ id, task, done, date }}
+
+*/
 function TodoForm(props) {
   const [isError, setIsError] = useState(false);
-  const [taskInput, setTaskInput] = useState("");
+  const [taskInput, setTaskInput] = useState(props.oldTodo?.task || "");
 
   const handleChangeInput = function (event) {
-    // console.log("user typing...", event.target.value);
     if (isError) setIsError(false);
-    // if (event.target.value.trim() === "") setIsError(true);
     setTaskInput(event.target.value);
   };
 
   const handleSubmit = function (event) {
-    // 1. PreventDefault
     event.preventDefault();
-
-    // 2. ก่อนจะ submit เราต้องรู้ก่อนว่า user พิมพ์อะไร >> รู้ผ่าน state: taskInput
-
-    // /// ***** START LOGIC: For Creating Todo ***** /////
-    // 3. FormValidation
-    // Case 1: Submit ได้ => ไม่ error
-    // Case 2: Submit ไม่ได้ => แสดง error
-
     if (taskInput.trim() === "") {
       console.log("Error");
       setIsError(true);
       return;
     }
-
-    // console.log("submit === create new Todo");
-    // // create NewTodo
-    // // 1. ส่ง Request ไปหลังบ้านเพื่อ save ลง Database
-    // // 2. ทำการอัพเดท State ของ AllTodo == React ทำการ Rerender
-    // // data = []
-    // // data = [{id: number, task: string, status: boolean, due_date: YYYY-MM-DD}]
-    // // oldState = [{old},{old},{old}] === props.data
-    // // newState = [{new},{old},{old},{old}]
-
-    // const newTodo = {
-    //   id: nanoid(),
-    //   task: taskInput,
-    //   status: false,
-    //   due_date: "2023-01-09",
-    // };
-    // // const newTodoLists = [newTodo, ...props.data];
-    // ///// ***** END LOGIC: For Creating Todo ***** /////
-
-    // ///// *** UPDATE STATE *** /////
-    // props.setTodo((prev) => [newTodo, ...prev]);
-    // // props.setTodo(newTodoLists);
-    // // props.setTodo((oldTodo) => [newTodo, ...oldTodo]);
-
-    // send taskInput to addTodo
-    props.addTodo(taskInput);
+    if (props.addTodo) props.addTodo(taskInput);
+    else if (props.editTodo && props.oldTodo) {
+      props.editTodo(props.oldTodo.id, { task: taskInput });
+    }
 
     props.setIsOpenForm(false);
   };
 
   const handleCancel = function () {
-    // correct props name = setIsOpenForm(false)
-    // incorrect props name = undefined(false) => BOOM!!
     props.setIsOpenForm(false);
   };
 
@@ -109,9 +81,6 @@ function TodoForm(props) {
             onClick={handleCancel}
           />
           <Button text={props.textSubmit} active={true} type="submit" />
-          {/* <button type="button" onClick={handleCancel}>
-            POC
-          </button> */}
         </div>
       </div>
     </form>

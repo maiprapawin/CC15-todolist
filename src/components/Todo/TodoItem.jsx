@@ -20,7 +20,12 @@ function TodoItem({ id, task, done, date, deleteTodo, editTodo }) {
   return (
     <>
       {isOpenForm ? (
-        <TodoForm textSubmit="Edit Task" setIsOpenForm={setIsOpenForm} />
+        <TodoForm
+          textSubmit="Edit Task"
+          setIsOpenForm={setIsOpenForm}
+          editTodo={editTodo}
+          oldTodo={{ id, task, done, date }}
+        />
       ) : (
         <li className={styles.todo}>
           <div
