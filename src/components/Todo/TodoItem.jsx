@@ -5,11 +5,12 @@ import { HiOutlineCheck } from "react-icons/hi";
 import TodoForm from "./TodoForm";
 import styles from "./TodoItem.module.scss";
 
-function TodoItem({ task, done, date }) {
+function TodoItem({ id, task, done, date }) {
   // Object Destructuring
   // function TodoItem(props) {
   // const {task,done,date} = props }
   const [isOpenForm, setIsOpenForm] = useState(false);
+  console.log(id);
 
   const handleClick = function () {
     setIsOpenForm(!isOpenForm);

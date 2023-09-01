@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HiOutlineCurrencyBangladeshi } from "react-icons/hi";
-
+import { nanoid } from "nanoid";
 import { Button } from "../Common/Button/Button";
 import styles from "./TodoForm.module.scss";
 
@@ -51,7 +50,24 @@ function TodoForm(props) {
       setIsError(true);
       return;
     }
-    console.log("submit");
+    console.log("submit === create new Todo");
+    // create NewTodo
+    // 1. ส่ง Request ไปหลังบ้านเพื่อ save ลง Database
+    // 2. ทำการอัพเดท State ของ AllTodo == React ทำการ Rerender
+    // data = []
+    // data = [{id: number, task: string, status: boolean, due_date: YYYY-MM-DD}]
+    // oldState = [{old},{old},{old}] === props.data
+    // newState = [{new},{old},{old},{old}]
+    const newTodo = {
+      id: nanoid(),
+      task: taskInput,
+      status: false,
+      due_date: "2023-01-09",
+    };
+    const newTodoLists = [newTodo, ...props.data];
+    props.setTodo(newTodoLists);
+    // props.setTodo((oldTodo) => [newTodo, ...oldTodo]);
+    props.setIsOpenForm(false);
   };
 
   const handleCancel = function () {
