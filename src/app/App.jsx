@@ -124,6 +124,7 @@ function App() {
       if (foundIndex !== -1) {
         // UpdateTodo
         const updatedTodo = { ...allTodos[foundIndex], ...updateTodoObj };
+        updatedTodo.date = updatedTodo.due_date;
         const options = {
           method: "PUT",
           headers: {
@@ -134,12 +135,10 @@ function App() {
 
         const response = await fetch(`${END_POINT}/${todoId}`, options);
         const data = await response.json();
-        console.log(data.todo);
 
         // UpdateState
-
         const newTodoLists = [...allTodos];
-        newTodoLists[foundIndex] = data.todo;
+        newTodoLists[foundIndex] = { ...data.todo, due_date: data.todo.date };
         setAllTodos(newTodoLists);
       }
     } catch (error) {
