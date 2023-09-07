@@ -81,10 +81,11 @@ function App() {
       };
       let response = await fetch(END_POINT, options);
       let data = await response.json();
-      console.log(data);
+      const createdTodo = { ...data.todo, due_date: data.todo.date };
+      delete createdTodo.date;
 
       // UPDATE STATE
-      setAllTodos((p) => [data.todo, ...p]);
+      setAllTodos((p) => [createdTodo, ...p]);
     } catch (error) {
       console.log(error);
     }
