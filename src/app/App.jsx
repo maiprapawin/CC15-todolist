@@ -1,5 +1,5 @@
 // Dependencies
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import dayjs from "dayjs";
 import "./App.scss";
@@ -11,42 +11,80 @@ import TodoLists from "../components/Todo/TodoLists";
 
 //////////////////////////////////////////////////
 
-const data = [
-  {
-    id: nanoid(),
-    task: "Suspendisse potenti.",
-    status: false,
-    due_date: "2023-04-26",
-  },
-  {
-    id: nanoid(),
-    task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
-    status: false,
-    due_date: "2023-05-08",
-  },
-  {
-    id: nanoid(),
-    task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
-    status: false,
-    due_date: "2023-04-30",
-  },
-];
+// const data = [
+//   {
+//     id: nanoid(),
+//     task: "Suspendisse potenti.",
+//     status: false,
+//     due_date: "2023-04-26",
+//   },
+//   {
+//     id: nanoid(),
+//     task: "In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
+//     status: false,
+//     due_date: "2023-05-08",
+//   },
+//   {
+//     id: nanoid(),
+//     task: "Aenean fermentum. Donec ut mauris eget massa tempor convallis.",
+//     status: false,
+//     due_date: "2023-04-30",
+//   },
+// ];
+
+const END_POINT = "http://localhost:8080/api/todos";
 
 function App() {
-  const [allTodos, setAllTodos] = useState(data);
+  const [allTodos, setAllTodos] = useState([]);
+
+  useEffect(() => {
+    // fetchAllTodo
+    async function fetchAllTodo() {
+      try {
+        let response = await fetch("http://localhost:8080/api/todos", {
+          method: "GET",
+        });
+        let todoData = await response.json();
+        console.log(todoData);
+        setAllTodos(todoData.todos);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchAllTodo();
+  }, []);
 
   // รวม Logics ต่างๆไว้ใน App แล้วค่อยส่งไปให้ลูกๆใช้
-  const addTodo = function (taskName) {
+  const addTodo = async function (taskName) {
     const newTodo = {
-      id: nanoid(),
+      // id: nanoid(), ไม่ต้องมีเพราะว่ามันสร้างให้เราเอง
       task: taskName,
       status: false,
       due_date: dayjs().format("YYYY-MM-DD"),
     };
-    setAllTodos((p) => [newTodo, ...p]);
+
+    try {
+      // SEND REQUEST: POST
+      // WAIT RESPONSE
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newTodo),
+      };
+      let response = await fetch(END_POINT, options);
+      let data = await response.json();
+      console.log(data);
+
+      // UPDATE STATE
+      setAllTodos((p) => [data.todo, ...p]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const deleteTodo = function (todoId) {
+  const deleteTodo = async function (todoId) {
     ///// Practice 1 /////
     // let foundIndex = allTodos.findIndex((todo) => todo.id === todoId);
     // if (foundIndex !== -1) {
@@ -60,7 +98,17 @@ function App() {
     // setAllTodos(newTodoLists);
 
     ///// Practice 3 /////
-    setAllTodos((prev) => prev.filter((todo) => todo.id !== todoId));
+
+    try {
+      const options = { method: "DELETE" };
+      let response = await fetch(`${END_POINT}/${todoId}`, options);
+      if (response.status === 204) {
+        // 204 แปลว่าลบสำเร็จ
+        setAllTodos((prev) => prev.filter((todo) => todo.id !== todoId));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const editTodo = function (todoId, updateTodoObj) {
