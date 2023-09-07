@@ -45,8 +45,14 @@ function App() {
           method: "GET",
         });
         let todoData = await response.json();
-        console.log(todoData);
-        setAllTodos(todoData.todos);
+
+        const newTodoLists = todoData.todos.map((todo) => {
+          const newTodo = { ...todo, due_date: todo.date };
+          delete todo.date;
+          return newTodo;
+        });
+
+        setAllTodos(newTodoLists);
       } catch (error) {
         console.log(error);
       }
@@ -111,34 +117,41 @@ function App() {
     }
   };
 
-  const editTodo = function (todoId, updateTodoObj) {
-    ///// Practice #1 /////
-    // let foundTodo = allTodos.find((todo) => todo.id === todoId);
-    // if (!foundTodo) return; // => function นี้จะไม่แก้ไขอะไร
+  const editTodo = async function (todoId, updateTodoObj) {
+    try {
+      let foundIndex = allTodos.findIndex((todo) => todo.id === todoId);
+      if (foundIndex !== -1) {
+        // UpdateTodo
+        const updatedTodo = { ...allTodos[foundIndex], ...updateTodoObj };
+        const options = {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(updatedTodo),
+        };
 
-    // const newTodo = Object.assign({}, foundTodo, newTodoObj); // ถ้ามีของซ้ำกันมันจะเอาตัวที่อยู่ขวาสุดมาทับฝั่งซ้าย
+        const response = await fetch(`${END_POINT}/${todoId}`, options);
+        const data = await response.json();
+        console.log(data.todo);
 
-    // let foundIndex = allTodos.findIndex((todo) => todo.id === todoId);
-    // if (foundIndex === -1) return;
+        // UpdateState
 
-    // const newTodoLists = [...allTodos];
-    // newTodoLists.splice(foundIndex, 1, newTodo); // ลบ 1 ตัวแล้วเพิ่ม newTodo เข้าไป = เอา todo เก่าออกไปแล้วใส่อันใหม่เข้าไปแทน
+        const newTodoLists = [...allTodos];
+        newTodoLists[foundIndex] = data.todo;
+        setAllTodos(newTodoLists);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    // FindTodo
+    // const newTodoLists = allTodos.reduce((acc, todo) => {
+    //   if (todo.id !== todoId) acc.push(todo);
+    //   else acc.push({ ...todo, ...updateTodoObj });
+    //   return acc;
+    // }, []); // รอบแรกเริ่มที่ array เปล่า
     // setAllTodos(newTodoLists);
-
-    ///// Practice #2 /////
-    // const newTodoLists = allTodos.map(function (todo) {
-    //   if (todo.id !== todoId) return todo;
-    //   else return { ...todo, ...newTodoObj };
-    // });
-    // setAllTodos(newTodoLists);
-
-    ///// Practice #3 /////
-    const newTodoLists = allTodos.reduce((acc, todo) => {
-      if (todo.id !== todoId) acc.push(todo);
-      else acc.push({ ...todo, ...updateTodoObj });
-      return acc;
-    }, []); // รอบแรกเริ่มที่ array เปล่า
-    setAllTodos(newTodoLists);
   };
 
   return (
